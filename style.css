@@ -47,3 +47,26 @@ article.wp-block-group::after {
 	display: table;
 	clear: both;
 }
+
+/* Service Posts in-page navigation */
+.service-posts-navigation {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin: 1.5rem 0 2rem;
+	padding: 1rem;
+	border: 4px double var(--wp--preset--color--accent);
+}
+
+.service-posts-navigation a {
+	flex: 1;
+	text-align: center;
+}
+
+/* Stack Service navigation links on smaller screens. */
+@media (max-width: 600px) {
+	.service-posts-navigation {
+		flex-direction: column;
+	}
+}

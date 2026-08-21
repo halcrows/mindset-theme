@@ -1,0 +1,63 @@
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"tagName":"main","metadata":{"name":"Main"},"style":{"spacing":{"padding":{"top":"0","bottom":"0","left":"0","right":"0"},"blockGap":"0"}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group" style="padding-top:0;padding-right:0;padding-bottom:0;padding-left:0"><!-- wp:query-title {"type":"archive","showPrefix":false,"style":{"spacing":{"margin":{"bottom":"1.5rem"}}}} /--></main>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","metadata":{"name":"Section"},"layout":{"type":"constrained"}} -->
+<section class="wp-block-group"><!-- wp:heading -->
+<h2 class="wp-block-heading">Photo</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":2,"query":{"perPage":100,"pages":0,"offset":0,"postType":"fwd-work","order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{"include":{"fwd-work-category":[8]}},"parents":[],"format":[],"excludeCurrent":null},"layout":{"type":"constrained"}} -->
+<div class="wp-block-query"><!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:group {"tagName":"article","metadata":{"name":"Article"}} -->
+<article class="wp-block-group"><!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-featured-image {"isLink":true,"width":"","height":"","sizeSlug":"large"} /-->
+
+<!-- wp:post-excerpt /--></article>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:group {"layout":{"inherit":true,"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination --></div>
+<!-- /wp:group --></div>
+<!-- /wp:query --></section>
+<!-- /wp:group -->
+
+<!-- wp:group {"tagName":"section","metadata":{"name":"Section"},"layout":{"type":"constrained"}} -->
+<section class="wp-block-group"><!-- wp:heading -->
+<h2 class="wp-block-heading">Web</h2>
+<!-- /wp:heading -->
+
+<!-- wp:query {"queryId":2,"query":{"perPage":100,"pages":0,"offset":0,"postType":"fwd-work","order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{"include":{"fwd-work-category":[7]}},"parents":[],"format":[],"excludeCurrent":null},"layout":{"type":"constrained"}} -->
+<div class="wp-block-query"><!-- wp:post-template {"layout":{"type":"grid","columnCount":3}} -->
+<!-- wp:group {"tagName":"article","metadata":{"name":"Article"}} -->
+<article class="wp-block-group"><!-- wp:post-title {"level":3,"isLink":true} /-->
+
+<!-- wp:post-featured-image {"isLink":true,"width":"","height":"","sizeSlug":"large"} /-->
+
+<!-- wp:post-excerpt /--></article>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:group {"layout":{"inherit":true,"type":"constrained"}} -->
+<div class="wp-block-group"><!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination --></div>
+<!-- /wp:group --></div>
+<!-- /wp:query --></section>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

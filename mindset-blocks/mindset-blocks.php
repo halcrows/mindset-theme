@@ -39,3 +39,127 @@ function mindset_register_custom_fields() {
 	);
 }
 add_action( 'init', 'mindset_register_custom_fields' );
+
+// Wrapper function for all PHP-only blocks
+function mindset_register_php_blocks() {
+
+	// Register the Service Posts PHP-only block.
+	register_block_type(
+		'mindset-blocks/service-posts',
+		array(
+			'title'           => __( 'Service Posts', 'mindset-blocks' ),
+			'icon'            => 'admin-tools',
+			'category'        => 'text',
+			'description'     => __( 'Displays all Service posts.', 'mindset-blocks' ),
+			'keywords'        => array( 'services', 'service', 'posts' ),
+			'render_callback' => 'mindset_render_service_posts',
+			'supports'        => array(
+				'autoRegister' => true
+			)
+		)
+	);
+}
+
+// Hook into 'init' to register the PHP-only blocks.
+add_action( 'init', 'mindset_register_php_blocks' );
+
+/**
+ * Renders the Service Posts block.
+ */
+function mindset_render_service_posts( $attributes ) {
+	ob_start();
+	?>
+	<div <?php echo get_block_wrapper_attributes(); ?>>
+		<?php
+
+		// Query all Service posts alphabetically to create in-page navigation.
+		$args = array(
+			'post_type'      => 'fwd-service',
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		);
+
+		$service_query = new WP_Query( $args );
+
+		// Output a navigation link for each Service post.
+		if ( $service_query->have_posts() ) :
+			?>
+			<nav class="service-posts-navigation">
+				<?php
+				while ( $service_query->have_posts() ) :
+					$service_query->the_post();
+					?>
+					<a href="#<?php echo esc_attr( get_the_ID() ); ?>">
+						<?php the_title(); ?>
+					</a>
+					<?php
+				endwhile;
+				?>
+			</nav>
+			<?php
+
+			// Restore the original post data after the navigation query.
+			wp_reset_postdata();
+		endif;
+
+
+// Get all Service Category terms.
+$terms = get_terms(
+	array(
+		'taxonomy' => 'fwd-service-category',
+	)
+);
+
+// Loop through each Service Category.
+if ( $terms && ! is_wp_error( $terms ) ) :
+	foreach ( $terms as $term ) :
+		?>
+
+		<h2><?php echo esc_html( $term->name ); ?></h2>
+
+		<?php
+
+		// Query Service posts assigned to the current taxonomy term.
+		$args = array(
+			'post_type'      => 'fwd-service',
+			'posts_per_page' => -1,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+			'tax_query'      => array(
+				array(
+					'taxonomy' => 'fwd-service-category',
+					'field'    => 'slug',
+					'terms'    => $term->slug,
+				),
+			),
+		);
+
+		$service_query = new WP_Query( $args );
+
+		// Output each Service post within the current taxonomy term.
+		if ( $service_query->have_posts() ) :
+			while ( $service_query->have_posts() ) :
+				$service_query->the_post();
+				?>
+
+				<article id="<?php echo esc_attr( get_the_ID() ); ?>">
+					<h3><?php the_title(); ?></h3>
+					<?php the_content(); ?>
+				</article>
+
+				<?php
+			endwhile;
+
+			// Restore the original post data after each taxonomy query.
+			wp_reset_postdata();
+		endif;
+
+	endforeach;
+endif;
+
+		?>
+	</div>
+	<?php
+	return ob_get_clean();
+}
